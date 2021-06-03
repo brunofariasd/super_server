@@ -14,7 +14,6 @@ public class Servidor {
 		Scanner in = new Scanner(System.in);
 		
 		int port = in.nextInt();
-		int pRegistry = in.nextInt();
 		int id = in.nextInt();
 		
 		try {
@@ -25,7 +24,7 @@ public class Servidor {
 			Acesso stub = (Acesso) UnicastRemoteObject.exportObject(implAcesso, port);
 			
 			// adiciona rmi registry na porta padrão (Registry.REGISTRY_PORT)
-			LocateRegistry.createRegistry(pRegistry);
+			LocateRegistry.createRegistry(1099);
 			
 			//Registry registro = LocateRegistry.getRegistry(IP);
 			Registry registro = LocateRegistry.getRegistry(InetAddress.getLocalHost().getHostAddress());

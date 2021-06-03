@@ -2,24 +2,20 @@ package rmi;
 
 import java.rmi.RemoteException;
 
+import controllers.Archiver;
+
 public class ImplementaAcesso implements Acesso {
 
 	@Override
 	public String maisUm(int id) throws RemoteException {
-		int numero = Integer.parseInt(Arquivo.lerArquivo("src/dados/recurso"+id)) + 1;
-		Arquivo.gravarArquivoTexto("src/dados/recurso"+id, numero);
-		return "O valor do recurso agora é: " + numero;
+		Archiver.gravarArchiverTexto("src/data/logs", new String ("["+id+"]"));
+		return "O valor do recurso agora e " + id;
 	}
 
 	@Override
 	public String menosUm(int id) throws RemoteException {
-		int numero = Integer.parseInt(Arquivo.lerArquivo("src/dados/recurso"+id)) -1;
-		Arquivo.gravarArquivoTexto("src/dados/recurso"+id, numero);
-		return "O valor do recurso agora é: " + numero;
+		Archiver.gravarArchiverTexto("src/data/logs", new String ("["+id+"]"));
+		return "O valor do recurso agora e: " + id;
 	}
-	
-	public String updateRecurso(int id, int opcao) throws RemoteException {
-		return (opcao == 1) ? maisUm(id) : menosUm(id);
-	}
-	
+		
 }

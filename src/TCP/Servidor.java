@@ -29,7 +29,7 @@ public class Servidor implements Runnable{
 	
 	public void run(){
 		try {
-			
+			arrlist.add(1);
 			Scanner s = null;
 			s = new Scanner(this.client.getInputStream());
 			String rcv;
@@ -39,9 +39,6 @@ public class Servidor implements Runnable{
 				System.out.println("Texto encriptado"+ rcv);
 				rcv = Encript.decriptarCifraCesar(3, rcv);
 				System.out.println("Texto decriptado"+ rcv);
-				
-				
-				rcv = s.nextLine();
 				
 				for (Integer index : arrlist) {		      
 					try {
@@ -55,7 +52,6 @@ public class Servidor implements Runnable{
 						errorCode = 400;
 					}
 					
-					
 					if (errorCode == 400) {
 						ResponseError.concat("Server "+index+" Conection LOST;");
 					} else {
@@ -64,7 +60,7 @@ public class Servidor implements Runnable{
 					}
 			    }
 				
-				System.out.println(Response);
+
 				PrintStream saida = new PrintStream(client.getOutputStream());
 				saida.println(Response);
 			}
