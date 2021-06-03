@@ -61,9 +61,10 @@ public class Servidor implements Runnable{
 					} else {
 						Response = stub.maisUm(19);
 						break;
-					}		
-			      }
+					}
+			    }
 				
+				System.out.println(Response);
 				PrintStream saida = new PrintStream(client.getOutputStream());
 				saida.println(Response);
 			}

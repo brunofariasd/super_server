@@ -27,9 +27,9 @@ public class RodaCliente {
 			}});
 		escutarServidor.start();
 		
-		/*
-		 * HERE
-		 */
+		System.out.print("DIGITE 0 PARA CONTINUAR: ");
+		sc.next();
+		c.enviarMensagem("SUM;4");
 	}
 	
 	public static String [] msgSeparada(String msg) {
