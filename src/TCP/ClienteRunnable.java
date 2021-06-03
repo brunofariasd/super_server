@@ -32,10 +32,9 @@ public class ClienteRunnable implements Runnable{
 						mensagem = s.nextLine();
 	
 						mensagem = Encript.decriptarCifraCesar(3, mensagem);
-						msg = msgSeparada(mensagem);		
 						
 						System.out.println("\n\n##########################  NOVA MENSAGEM RECEBIDA!  ##########################\n");
-						System.out.println(msg[0]);
+						System.out.println(mensagem);
 						System.out.println("\n###############################################################################\n");		
 					}
 				} catch (IOException e) {
@@ -59,7 +58,7 @@ public class ClienteRunnable implements Runnable{
 		saida.close();
 		cliente.close();
 		
-		System.out.println("Cliente finaliza conexão.");
+		System.out.println("Cliente finaliza conexï¿½o.");
 	}
 
 	 public static String [] msgSeparada(String msg) {

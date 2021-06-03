@@ -13,7 +13,11 @@ public class Servidor {
 		
 		Scanner in = new Scanner(System.in);
 		
+		System.out.print("Escreva a porta para o stub: ");
 		int port = in.nextInt();
+		System.out.print("Escreva a porta para o registro: ");
+		int pResgistry = in.nextInt();
+		System.out.print("Escreva o id desse Servidor: ");
 		int id = in.nextInt();
 		
 		try {
@@ -23,11 +27,11 @@ public class Servidor {
 			//criar objeto stub do servidor
 			Acesso stub = (Acesso) UnicastRemoteObject.exportObject(implAcesso, port);
 			
-			// adiciona rmi registry na porta padrão (Registry.REGISTRY_PORT)
-			LocateRegistry.createRegistry(1099);
+			//Registry registro = LocateRegistry.getRegistry(InetAddress.getLocalHost().getHostAddress());
+			Registry registro = LocateRegistry.getRegistry("127.0.1.1", pResgistry);
 			
-			//Registry registro = LocateRegistry.getRegistry(IP);
-			Registry registro = LocateRegistry.getRegistry(InetAddress.getLocalHost().getHostAddress());
+			// adiciona rmi registry na porta padrão (Registry.REGISTRY_PORT)
+			LocateRegistry.createRegistry(pResgistry);
 
 			registro.bind("Server"+id, stub);
 

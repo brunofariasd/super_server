@@ -34,6 +34,8 @@ public class Servidor implements Runnable{
 			s = new Scanner(this.client.getInputStream());
 			String rcv;
 			
+			ResponseError = "";
+			
 			while(s.hasNextLine()){
 				rcv = s.nextLine();
 				System.out.println("Texto encriptado"+ rcv);
@@ -42,12 +44,12 @@ public class Servidor implements Runnable{
 				
 				for (Integer index : arrlist) {		      
 					try {
-						Registry registro = LocateRegistry.getRegistry("localhost");
+						Registry registro = LocateRegistry.getRegistry("127.0.1.1", 8080);
 						
 						stub = (Acesso) registro.lookup("Server" + index);
 						
 						errorCode = 204;
-						
+						System.out.println(stub.maisUm(10));
 					} catch (Exception e) {
 						errorCode = 400;
 					}
@@ -59,10 +61,17 @@ public class Servidor implements Runnable{
 						break;
 					}
 			    }
-				
-
-				PrintStream saida = new PrintStream(client.getOutputStream());
-				saida.println(Response);
+				System.out.println(ResponseError);
+				System.out.println(Response);
+				if (errorCode == 204) {
+					System.out.println(Response);
+					PrintStream saida = new PrintStream(client.getOutputStream());
+					saida.println(Encript.encriptarCifraCesar(3, Response));
+				} else {
+					System.out.println(ResponseError);
+					PrintStream saida = new PrintStream(client.getOutputStream());
+					saida.println(Encript.encriptarCifraCesar(3, ResponseError));
+				}
 			}
 			//Closed scanner e socket
 			s.close();
