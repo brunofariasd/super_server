@@ -30,17 +30,22 @@ public class Servidor implements Runnable{
 	public void run(){
 		try {
 			arrlist.add(1);
+			arrlist.add(2);
 			Scanner s = null;
 			s = new Scanner(this.client.getInputStream());
 			String rcv;
+			String [] msgSeparada;
 			
 			ResponseError = "";
 			
 			while(s.hasNextLine()){
+				
 				rcv = s.nextLine();
 				System.out.println("Texto encriptado"+ rcv);
 				rcv = Encript.decriptarCifraCesar(3, rcv);
 				System.out.println("Texto decriptado"+ rcv);
+				
+				msgSeparada = msgSeparada(rcv);
 				
 				for (Integer index : arrlist) {		      
 					try {
@@ -49,7 +54,6 @@ public class Servidor implements Runnable{
 						stub = (Acesso) registro.lookup("Server" + index);
 						
 						errorCode = 204;
-						System.out.println(stub.maisUm(10));
 					} catch (Exception e) {
 						errorCode = 400;
 					}
@@ -57,7 +61,7 @@ public class Servidor implements Runnable{
 					if (errorCode == 400) {
 						ResponseError.concat("Server "+index+" Conection LOST;");
 					} else {
-						Response = stub.maisUm(19);
+						Response = msgSeparada[0].equalsIgnoreCase("SUM") ? stub.maisUm(Integer.parseInt(msgSeparada[1])) : stub.menosUm(Integer.parseInt(msgSeparada[1]));
 						break;
 					}
 			    }

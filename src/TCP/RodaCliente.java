@@ -27,9 +27,33 @@ public class RodaCliente {
 			}});
 		escutarServidor.start();
 		
-		System.out.print("DIGITE 0 PARA CONTINUAR: ");
-		sc.next();
-		c.enviarMensagem("SUM;4");
+		int escolha = -1, number;
+		while(escolha != 0) {
+			
+			System.out.print("Qual opção você deseja Realizar (0 P/ SAIR - 1 P/ SOMA - 2 P/ SUBTRAÇÃO): ");
+			escolha = sc.nextInt();
+		
+			sc.nextLine();
+			switch(escolha) {
+				case 0: 
+					c.encerrarConexao();
+					System.exit(0);
+					break;
+				case 1:
+					System.out.print("Digite um numero: ");
+					number = sc.nextInt();
+					c.enviarMensagem("SUM"+";"+number);
+					break;
+				case 2:
+					System.out.print("Digite um numero: ");
+					number = sc.nextInt();
+					c.enviarMensagem("SUB"+";"+number);
+					break;
+				default: 
+					System.out.print("Opção invalida: ");
+					break;
+			}
+		}
 	}
 	
 	public static String [] msgSeparada(String msg) {
