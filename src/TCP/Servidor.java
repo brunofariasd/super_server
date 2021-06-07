@@ -14,6 +14,7 @@ import rmi.Acesso;
 public class Servidor implements Runnable{
 	
 	static ArrayList<Integer> arrlist = new ArrayList<Integer>();
+	static ArrayList<Integer> arrPortRegistry = new ArrayList<Integer>();
 	static ArrayList<String> arrlistHost = new ArrayList<String>();
 	private static int errorCode;
 	private static Acesso stub;
@@ -31,6 +32,8 @@ public class Servidor implements Runnable{
 		try {
 			arrlist.add(1);
 			arrlist.add(2);
+			arrPortRegistry.add(8080);
+			arrPortRegistry.add(8090);
 			Scanner s = null;
 			s = new Scanner(this.client.getInputStream());
 			String rcv;
@@ -46,12 +49,13 @@ public class Servidor implements Runnable{
 				System.out.println("Texto decriptado"+ rcv);
 				
 				msgSeparada = msgSeparada(rcv);
-				
-				for (Integer index : arrlist) {		      
+					
+				int i = 1;
+				while ( i < arrlist.size()) {
 					try {
-						Registry registro = LocateRegistry.getRegistry("127.0.1.1", 8080);
+						Registry registro = LocateRegistry.getRegistry("127.0.1.1", arrPortRegistry.get(i));
 						
-						stub = (Acesso) registro.lookup("Server" + index);
+						stub = (Acesso) registro.lookup("Server" + arrlist.get(i));
 						
 						errorCode = 204;
 					} catch (Exception e) {
@@ -59,7 +63,8 @@ public class Servidor implements Runnable{
 					}
 					
 					if (errorCode == 400) {
-						ResponseError.concat("Server "+index+" Conection LOST;");
+						ResponseError.concat("Server "+arrlist.get(i)+" Conection LOST;");
+						i++;
 					} else {
 						Response = msgSeparada[0].equalsIgnoreCase("SUM") ? stub.maisUm(Integer.parseInt(msgSeparada[1])) : stub.menosUm(Integer.parseInt(msgSeparada[1]));
 						break;
