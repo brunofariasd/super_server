@@ -44,11 +44,11 @@ public class Servidor implements Runnable{
 			while(s.hasNextLine()){
 				
 				rcv = s.nextLine();
-				System.out.println("Texto encriptado"+ rcv);
+				System.out.println("Texto encriptado: "+ rcv);
 				rcv = Encript.decriptarCifraCesar(3, rcv);
-				System.out.println("Texto decriptado"+ rcv);
+				System.out.println("Texto decriptado: "+ rcv);
 				
-				msgSeparada = msgSeparada(rcv);
+				/*msgSeparada = msgSeparada(rcv);*/
 					
 				int i = 1;
 				while ( i < arrlist.size()) {
@@ -66,7 +66,7 @@ public class Servidor implements Runnable{
 						ResponseError.concat("Server "+arrlist.get(i)+" Conection LOST;");
 						i++;
 					} else {
-						Response = msgSeparada[0].equalsIgnoreCase("SUM") ? stub.maisUm(Integer.parseInt(msgSeparada[1])) : stub.menosUm(Integer.parseInt(msgSeparada[1]));
+						Response = rcv.equalsIgnoreCase("SUM") ? stub.maisUm() : stub.menosUm();
 						break;
 					}
 			    }

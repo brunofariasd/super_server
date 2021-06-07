@@ -5,19 +5,26 @@ import java.rmi.RemoteException;
 import controllers.Archiver;
 
 public class ImplementaAcesso implements Acesso {
+	
+	static String value;
+	static int newValue;
 
 	@Override
-	public String maisUm(int number) throws RemoteException {
-		int newValue = ++number;
-		Archiver.gravarArchiverTexto("src/data/logs", new String ("Numero informado: ["+number+"], now: ["+newValue+"]"));
-		return "O valor do recurso agora e " + newValue;
+	public String maisUm() throws RemoteException {
+		value = Archiver.lerArchiver("src/data/logs.txt");
+		newValue = Integer.parseInt(value.replaceAll("[^0-9]", ""));
+		++newValue;
+		Archiver.gravarArchiverTexto("src/data/logs.txt", String.valueOf(newValue));
+		return "O valor do recurso agora e: "+ newValue;
 	}
 
 	@Override
-	public String menosUm(int number) throws RemoteException {
-		int newValue = --number;
-		Archiver.gravarArchiverTexto("src/data/logs", new String ("Numero informado: ["+number+"], now: ["+newValue+"]"));
-		return "O valor do recurso agora e: " + newValue;
+	public String menosUm() throws RemoteException {
+		value = Archiver.lerArchiver("src/data/logs.txt");
+		newValue = Integer.parseInt(value.replaceAll("[^0-9]", ""));
+		--newValue;
+		Archiver.gravarArchiverTexto("src/data/logs.txt", String.valueOf(newValue));
+		return "O valor do recurso agora e: "+ value;
 	}
 		
 }

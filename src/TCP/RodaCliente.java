@@ -27,10 +27,10 @@ public class RodaCliente {
 			}});
 		escutarServidor.start();
 		
-		int escolha = -1, number;
+		int escolha = -1;
 		while(escolha != 0) {
 			
-			System.out.print("Qual opção você deseja Realizar (0 P/ SAIR - 1 P/ SOMA - 2 P/ SUBTRAÇÃO): ");
+			System.out.print("Qual opï¿½ï¿½o vocï¿½ deseja Realizar (0 P/ SAIR - 1 P/ SOMA - 2 P/ SUBTRAï¿½ï¿½O): ");
 			escolha = sc.nextInt();
 		
 			sc.nextLine();
@@ -40,17 +40,13 @@ public class RodaCliente {
 					System.exit(0);
 					break;
 				case 1:
-					System.out.print("Digite um numero: ");
-					number = sc.nextInt();
-					c.enviarMensagem("SUM"+";"+number);
+					c.enviarMensagem("SUM");
 					break;
 				case 2:
-					System.out.print("Digite um numero: ");
-					number = sc.nextInt();
-					c.enviarMensagem("SUB"+";"+number);
+					c.enviarMensagem("SUB");
 					break;
 				default: 
-					System.out.print("Opção invalida: ");
+					System.out.print("Opï¿½ï¿½o invalida: ");
 					break;
 			}
 		}
