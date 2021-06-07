@@ -47,9 +47,7 @@ public class Servidor implements Runnable{
 				System.out.println("Texto encriptado: "+ rcv);
 				rcv = Encript.decriptarCifraCesar(3, rcv);
 				System.out.println("Texto decriptado: "+ rcv);
-				
-				/*msgSeparada = msgSeparada(rcv);*/
-					
+									
 				int i = 1;
 				while ( i < arrlist.size()) {
 					try {

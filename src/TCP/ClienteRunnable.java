@@ -58,7 +58,7 @@ public class ClienteRunnable implements Runnable{
 		saida.close();
 		cliente.close();
 		
-		System.out.println("Cliente finaliza conex�o.");
+		System.out.println("Cliente finaliza conexao.");
 	}
 
 	 public static String [] msgSeparada(String msg) {

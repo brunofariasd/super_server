@@ -30,7 +30,7 @@ public class RodaCliente {
 		int escolha = -1;
 		while(escolha != 0) {
 			
-			System.out.print("Qual op��o voc� deseja Realizar (0 P/ SAIR - 1 P/ SOMA - 2 P/ SUBTRA��O): ");
+			System.out.print("Qual opcao voce deseja Realizar (0 P/ SAIR - 1 P/ SOMA - 2 P/ SUBTRACAO): ");
 			escolha = sc.nextInt();
 		
 			sc.nextLine();
@@ -46,7 +46,7 @@ public class RodaCliente {
 					c.enviarMensagem("SUB");
 					break;
 				default: 
-					System.out.print("Op��o invalida: ");
+					System.out.print("Opcao invalida: ");
 					break;
 			}
 		}
