@@ -26,7 +26,7 @@ public class ImplementaAcesso implements Acesso {
 		newValue = Integer.parseInt(value.replaceAll("[^0-9]", ""));
 		--newValue;
 		Archiver.gravarArchiverTexto(serverLogs, String.valueOf(newValue));
-		return "O valor do recurso agora e: "+ value;
+		return "O valor do recurso agora e: "+ newValue;
 	}
 		
 }
