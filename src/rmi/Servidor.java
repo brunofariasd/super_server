@@ -1,7 +1,6 @@
 package rmi;
 
 import java.io.IOException;
-import java.net.InetAddress;
 import java.rmi.AlreadyBoundException;
 import java.rmi.registry.LocateRegistry;
 import java.rmi.registry.Registry;

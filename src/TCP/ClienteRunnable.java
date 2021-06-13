@@ -26,7 +26,6 @@ public class ClienteRunnable implements Runnable{
 					
 					s = new Scanner(cliente.getInputStream());
 					String mensagem;
-					String [] msg;
 					
 					while(s.hasNextLine()){
 						mensagem = s.nextLine();

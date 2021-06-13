@@ -8,6 +8,7 @@ import java.rmi.registry.Registry;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+import controllers.Archiver;
 import controllers.Encript;
 import rmi.Acesso;
 
@@ -15,7 +16,6 @@ public class Servidor implements Runnable{
 	
 	static ArrayList<Integer> arrlist = new ArrayList<Integer>();
 	static ArrayList<Integer> arrPortRegistry = new ArrayList<Integer>();
-	static ArrayList<String> arrlistHost = new ArrayList<String>();
 	private static int errorCode;
 	private static Acesso stub;
 	static String Response;
@@ -37,7 +37,6 @@ public class Servidor implements Runnable{
 			Scanner s = null;
 			s = new Scanner(this.client.getInputStream());
 			String rcv;
-			String [] msgSeparada;
 			
 			ResponseError = "";
 			
@@ -64,7 +63,8 @@ public class Servidor implements Runnable{
 						ResponseError.concat("Server "+arrlist.get(i)+" Conection LOST;");
 						i++;
 					} else {
-						Response = rcv.equalsIgnoreCase("SUM") ? stub.maisUm() : stub.menosUm();
+						Response = rcv.equalsIgnoreCase("SUM") ? stub.maisUm(i) : stub.menosUm(i);
+						updateData(Response);
 						break;
 					}
 			    }
@@ -105,11 +105,24 @@ public class Servidor implements Runnable{
 			}
 		}
 	 }
- 
-	public static String [] msgSeparada(String msg) {
+	 
+	 public static void updateData(String response) throws IOException {
+		 String serverLogs, value;
+		 int i = 1, newValue;
+		 while ( i <= 2) {
+			serverLogs = "src/data/logs_s"+i+".txt";
+			value = Archiver.lerArchiver(serverLogs);
+			newValue = Integer.parseInt(response.replaceAll("[^0-9]", ""));
+			if (value.equalsIgnoreCase(response) == false) {
+			 Archiver.gravarArchiverTexto(serverLogs, String.valueOf(newValue));
+			} i++;
+		 }
+	 }
+	 
+	 public static String [] msgSeparada(String msg) {
 		
 		String [] arrayString = msg.split(";");
 		return arrayString;
-	}
+	 }
  
 }
